@@ -67,24 +67,31 @@ class Expense_tracker:
       
       if int(self.ask_again)==1:
         self.day = self.ask_input("Enter day: ")
+        self.display()
       
       elif int(self.ask_again)==2:
         self.month = self.ask_input("Enter month: ")
+        self.display()
         
       elif int(self.ask_again)==3:
         self.year = self.ask_input("Enter year: ")
+        self.display()
         
       elif int(self.ask_again)==4:
         self.amount= self.ask_input("Enter amount(rupee): ")
+        self.display()
           
       elif int(self.ask_again)==5:
         self.category= self.ask_input("Enter category: ")
+        self.display()
         
       elif int(self.ask_again)==6:
         self.description =self.ask_input("Enter short description: ")
+        self.display()
         
       elif int(self.ask_again)==7:
         self.method= self.ask_input("Enter payment method: ")
+        self.display()
           
       else:
         print("!!!Invalid Input!!!")
