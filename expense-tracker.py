@@ -20,7 +20,6 @@ class Expense_tracker:
         self.month = self.ask_input("Enter month: ")
         self.year = self.ask_input("Enter year: ")
         self.amount= self.ask_input("Enter amount(rupee): ")
-
         self.category= self.ask_input("Enter category: ")
         self.description =self.ask_input("Enter short description: ")
         self.method= self.ask_input("Enter payment method: ")
@@ -51,6 +50,7 @@ class Expense_tracker:
             print("6. description")
             print("7. payment method")
             print('----------')
+            self.edit_input()
        
         elif self.choice.lower()=='n':
             return
@@ -62,9 +62,33 @@ class Expense_tracker:
 
    
    
-    def edit_input(self):pass
-
-   
+    def edit_input(self):
+      self.ask_again =self.ask_input("Enter field number[1-7]: ")
+      
+      if int(self.ask_again)==1:
+        self.day = self.ask_input("Enter day: ")
+      
+      elif int(self.ask_again)==2:
+        self.month = self.ask_input("Enter month: ")
+        
+      elif int(self.ask_again)==3:
+        self.year = self.ask_input("Enter year: ")
+        
+      elif int(self.ask_again)==4:
+        self.amount= self.ask_input("Enter amount(rupee): ")
+          
+      elif int(self.ask_again)==5:
+        self.category= self.ask_input("Enter category: ")
+        
+      elif int(self.ask_again)==6:
+        self.description =self.ask_input("Enter short description: ")
+        
+      elif int(self.ask_again)==7:
+        self.method= self.ask_input("Enter payment method: ")
+          
+      else:
+        print("!!!Invalid Input!!!")
+        self.edit_input()
    
     def save_data(self): pass
 
