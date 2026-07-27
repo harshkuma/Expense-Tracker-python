@@ -28,7 +28,7 @@ class Expense_tracker:
 
     def display(self):
         print("These are the details:")
-        print(f"date(intyyyy/mm/dd): {self.year}/{self.month:02}/{self.day:02}"())
+        print(f"date(yyyy/mm/dd): {self.year}/{self.month:02}/{self.day:02}")
         print(f"amount: {self.amount}")
         print(f"category: {self.category}")
         print(f"descripiton: {self.description}")
