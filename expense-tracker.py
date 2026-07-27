@@ -1,4 +1,3 @@
-
 class Expense_tracker:
     def __init__(self):
         self.day =''
@@ -7,7 +6,8 @@ class Expense_tracker:
         self.amount=0
         self.categories=['food','travel','shopping','bills','entertainment', 'miscellaneous']
         self.category=""
-        self.description='miscellaneous'
+        self.default_description='miscellaneous'
+        self.description =""
         self.methods=['cash','upi','card','gpay']
         self.method=""
 
@@ -19,34 +19,50 @@ class Expense_tracker:
         self.day = self.ask_input("Enter day: ")
         self.month = self.ask_input("Enter month: ")
         self.year = self.ask_input("Enter year: ")
-        self.amount= self.ask_input("Enter amount: ")
+        self.amount= self.ask_input("Enter amount(rupee): ")
+
         self.category= self.ask_input("Enter category: ")
-        self.description =self.ask_input("Enter short desctiption: ")
+        self.description =self.ask_input("Enter short description: ")
         self.method= self.ask_input("Enter payment method: ")
+        print('----------')
    
 
     def display(self):
-        print(f"date: {self.year}/{int(self.month):2}/{int(self.day):2}")
+        print("These are the details:")
+        print(f"date(yyyy/mm/dd): {self.year}/{int(self.month):02}/{int(self.day):02}")
+
         print(f"amount: {self.amount}")
         print(f"category: {self.category}")
-        print(f"descripiton: {self.descripiton}")
+        print(f"descripiton: {self.description}")
         print(f"payment method: {self.method}")
-        self.ask_again()
+        print('----------')
+        self.edit_opiton()
        
    
-    def ask_again(self):
-        choice= input("Would you like to edit info (y/n): ")
-        if choice.lower() =='y':
-            self.edit_opiton()
-           
-        elif choice.lower()=='n':
+    def edit_opiton(self):
+        self.choice= self.ask_input("Would you like to edit any field (y/n): ")
+       
+        if self.choice.lower() =='y':
+            print("1. day")
+            print("2. month")
+            print("3. year")
+            print("4. amount")
+            print("5. category")
+            print("6. description")
+            print("7. payment method")
+            print('----------')
+       
+        elif self.choice.lower()=='n':
             return
-   
-    def edit_opiton(self): pass
+       
+        else:
+            print
+            print("!!!Invalid Input!!!")
+            self.edit_opiton()
 
    
    
-    def edit_input(self): pass
+    def edit_input(self):pass
 
    
    
