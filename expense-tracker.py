@@ -1,3 +1,4 @@
+import csv
 class Expense_tracker:
     def __init__(self):
         self.day =''
@@ -19,16 +20,16 @@ class Expense_tracker:
         self.day = int(self.ask_input("Enter day: "))
         self.month = int(self.ask_input("Enter month: "))
         self.year = int(self.ask_input("Enter year: "))
-        self.amount= int(self.ask_input("Enter amount(rupee): "))
-        self.category= self.ask_input("Enter category: ")
-        self.description =self.ask_input("Enter short description: ")
-        self.method= self.ask_input("Enter payment method: ")
+        self.amount = int(self.ask_input("Enter amount(rupee): "))
+        self.category = self.ask_input("Enter category: ")
+        self.description = self.ask_input("Enter short description: ")
+        self.method = self.ask_input("Enter payment method: ")
         print('----------')
    
 
     def display(self):
         print("These are the details:")
-        print(f"date(intyyyy/mm/dd): {self.year}/{self.month:02}/{self.day:02}"())
+        print(f"date(intyyyy/mm/dd): {self.year}/{self.month:02}/{self.day:02}")
         print(f"amount: {self.amount}")
         print(f"category: {self.category}")
         print(f"descripiton: {self.description}")
@@ -104,8 +105,12 @@ class Expense_tracker:
         print("!!!Invalid Input!!!")
         print()
         self.edit_input()
-   
-    def save_data(self): pass
+  
+    def save_data(self):
+      self.file = open("expense.csv",'a',newline="")
+      self.afile = csv.writer(self.file)
+      self.afile.writerow([f'{self.year}/{(self.month):02}/{(self.day):02}',self.amount,self.category,self.description,self.method])
+      self.file.close()
 
 
 def main():
