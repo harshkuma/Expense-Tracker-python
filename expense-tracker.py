@@ -111,7 +111,7 @@ class Expense_tracker:
       self.afile = csv.writer(self.file)
       self.afile.writerow([f'{self.year}/{(self.month):02}/{(self.day):02}',self.amount,self.category,self.description,self.method])
       self.file.close()
-
+      print("Data saved")
 
 def main():
     tracker =Expense_tracker()
