@@ -1,5 +1,6 @@
 import csv
 class Expense_tracker:
+    
     def __init__(self):
         self.day =''
         self.month =''
@@ -15,12 +16,12 @@ class Expense_tracker:
     def ask_input(self,message):
         value= input(message)
         return value
-   
+
     def collect(self):
         self.day = int(self.ask_input("Enter day: "))
         self.month = int(self.ask_input("Enter month: "))
         self.year = int(self.ask_input("Enter year: "))
-        self.amount = int(self.ask_input("Enter amount(rupee): "))
+        self.amount = float(self.ask_input("Enter amount(rupee): "))
         self.category = self.ask_input("Enter category: ")
         self.description = self.ask_input("Enter short description: ")
         self.method = self.ask_input("Enter payment method: ")
@@ -112,11 +113,54 @@ class Expense_tracker:
       self.afile.writerow([f'{self.year}/{(self.month):02}/{(self.day):02}',self.amount,self.category,self.description,self.method])
       self.file.close()
 
+    def ask_salary(self):
+       salary = float(self.ask_input("Enter salary: "))
+       return salary
+
+    def add_amount(self):
+       add_amt = float(self.ask_input("Enter amount to add: "))
+       return add_amt
+
+    def add_expense(self):
+       self.collect()
+       self.display()
+       self.save_data()
+       print("Details Saved")
+
+def start_menu():
+       print("1. Add salary (it reset the salary amount)")
+       print("2. Add amount to existing salary")
+       print("3. Add expense")
+       print("4. Exit")
+       ask = input("Choose action: ")
+       return ask
+
 
 def main():
     tracker =Expense_tracker()
-    tracker.collect()
-    tracker.display()
-    tracker.save_data()
+    choice = start_menu()
+    if choice =="1":
+       tracker.ask_salary()
+       print("Detail saved")
+
+    elif choice=='2':
+       tracker.add_amount()
+       print("Detail saved")
+
+    elif choice=='3':
+       tracker.add_expense()
+       print("Detail saved")
+
+    elif choice=='4':
+       print("!!!Program ended!!!")
+       return
+
+    else:
+       print()
+       print("!!!invalid input!!!")
+       print()
+       main()
+
+
 
 main()
