@@ -115,24 +115,52 @@ class Expense_tracker:
 
     def ask_salary(self):
        salary = float(self.ask_input("Enter salary: "))
+       with open('salary_file.csv','w',newline="") as salary_file:
+          asalary_file= csv.writer(salary_file)
+          asalary_file.writerow([salary])
        return salary
 
     def add_amount(self):
-       add_amt = float(self.ask_input("Enter amount to add: "))
-       return add_amt
+       self.add_amt = float(self.ask_input("Enter amount to add: "))
+       with open('salary_file.csv','r') as abc:
+          reader = csv.reader(abc)
+          for row in reader:
+             number =row[0]
+             actual_int =float(number)
+             actual_int+=self.add_amt
 
+       with open("salary_file.csv",'w',newline="") as open_again:
+          write_again = csv.writer(open_again)
+          write_again.writerow([actual_int])
+       return actual_int
+
+    def update_salary(self):
+       with open("salary_file.csv", 'r') as update_salary:
+          aupdate_salary = csv.reader(update_salary)
+          for num in aupdate_salary:
+             number1 =num[0]
+             actual_num =float(number1)
+             actual_num-=self.amount
+
+       with open("salary_file.csv",'w',newline="") as open_file:
+          new_salary = csv.writer(open_file)
+          new_salary.writerow([actual_num])
+       return actual_num
+        
     def add_expense(self):
        self.collect()
        self.display()
        self.save_data()
+       self.update_salary()
        print("Details Saved")
 
 def start_menu():
-       print("1. Add salary (it reset the salary amount)")
+       print("1. Update salary (it reset the previous salary amount)")
        print("2. Add amount to existing salary")
        print("3. Add expense")
        print("4. Exit")
        ask = input("Choose action: ")
+       print()
        return ask
 
 
@@ -144,14 +172,17 @@ def main():
       if choice =="1":
         tracker.ask_salary()
         print("Detail saved")
+        print()
 
       elif choice=='2':
         tracker.add_amount()
         print("Detail saved")
+        print()
 
       elif choice=='3':
         tracker.add_expense()
         print("Detail saved")
+        print()
 
       elif choice=='4':
         print("!!!Program ended!!!")
