@@ -137,29 +137,31 @@ def start_menu():
 
 
 def main():
-    tracker =Expense_tracker()
-    choice = start_menu()
-    if choice =="1":
-       tracker.ask_salary()
-       print("Detail saved")
+    while True:
+       
+      tracker =Expense_tracker()
+      choice = start_menu()
+      if choice =="1":
+        tracker.ask_salary()
+        print("Detail saved")
 
-    elif choice=='2':
-       tracker.add_amount()
-       print("Detail saved")
+      elif choice=='2':
+        tracker.add_amount()
+        print("Detail saved")
 
-    elif choice=='3':
-       tracker.add_expense()
-       print("Detail saved")
+      elif choice=='3':
+        tracker.add_expense()
+        print("Detail saved")
 
-    elif choice=='4':
-       print("!!!Program ended!!!")
-       return
+      elif choice=='4':
+        print("!!!Program ended!!!")
+        break
 
-    else:
-       print()
-       print("!!!invalid input!!!")
-       print()
-       main()
+      else:
+        print()
+        print("!!!invalid input!!!")
+        print()
+        main()
 
 
 
