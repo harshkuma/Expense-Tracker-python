@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime as dt
 class Expense_tracker:
     
   def __init__(self):
@@ -7,7 +8,7 @@ class Expense_tracker:
     self.year =''
     self.amount=0
     self.category=""
-    self.default_description='miscellaneous'
+    self.default_category='yaad nahi'
     self.description =""
     self.method=""
 
@@ -16,21 +17,70 @@ class Expense_tracker:
     return value
 
   def collect(self):
-    self.day = int(self.ask_input("Enter day: "))
-    self.month = int(self.ask_input("Enter month: "))
-    self.year = int(self.ask_input("Enter year: "))
-    self.amount = float(self.ask_input("Enter amount(rupee): "))
-    self.category = self.ask_input("Enter category: ")
-    self.description = self.ask_input("Enter short description: ")
-    self.method = self.ask_input("Enter payment method: ")
+    while True:
+      try:
+        self.day = int(self.ask_input("Enter day: "))
+        if not 1<= self.day <=31:
+          print("!!!Invalid date!!!")
+        break
+        
+      except:
+        print("!!!Invalid Input!!!")
+        print()
+      
+    while True:
+      try:
+        self.month = int(self.ask_input("Enter month: "))
+        if not 1<= self.month <=12:
+          print("!!!Invalid Month!!!")
+        break
+        
+      except:
+        print("!!!Invalid Input!!!")
+        print()
+            
+    while True:
+      try:
+        self.year = int(self.ask_input("Enter year: "))
+        if not dt.now().year>= self.year:
+          print(f"!!!Year must not exceed {dt.now().year}!!!")
+        break
+        
+      except:
+        print("!!!Invalid Input!!!")
+        print()   
+            
+    while True:
+      try:
+        self.amount = float(self.ask_input("Enter amount(rupee): "))
+        break
+        
+      except:
+        print("!!!Invalid Input!!!")
+        print()
+    
+    print()
+    self.category = self.ask_input("(leave blank if not remember)\nWhat did you spend your money on: ")
+    if self.category.strip() =="":
+      self.category =self.default_category
+      
+    print()
+    self.description = self.ask_input("(leave blank if don't want to)\nEnter short description: ")
+    if self.description.strip() =="":
+      self.description ="No description"
+    
+    print()
+    self.method = self.ask_input("[upi, cash, card]\n(leave blank if not sure)\nEnter payment method: ")
+    if self.method.strip() =="":
+      self.method = "unknown"
     print('----------')
 
 
   def display(self):
     print("These are the details:")
-    print(f"date(intyyyy/mm/dd): {self.year}/{self.month:02}/{self.day:02}")
+    print(f"date(yyyy/mm/dd): {self.year}/{self.month:02}/{self.day:02}")
     print(f"amount: {self.amount}")
-    print(f"category: {self.category}")
+    print(f"money spent on: {self.category}")
     print(f"descripiton: {self.description}")
     print(f"payment method: {self.method}")
     print('----------')
@@ -64,45 +114,78 @@ class Expense_tracker:
     self.ask_again =self.ask_input("Enter field number[1-7]: ")
     
     if int(self.ask_again)==1:
-      self.day = self.ask_input("Enter day: ")
-      print()
+      while True:
+        try:
+          self.day = int(self.ask_input("Enter day: "))
+          if not 1>= self.day <=31:
+            print("!!!Invalid date!!!")
+          break
+          
+        except:
+          print("!!!Invalid Input!!!")
+          print()
       self.display()
     
     elif int(self.ask_again)==2:
-      self.month = self.ask_input("Enter month: ")
-      print()
+      while True:
+        try:
+          self.month = int(self.ask_input("Enter month: "))
+          if not 1>= self.day <=12:
+            print("!!!Invalid Month!!!")
+          break
+          
+        except:
+          print("!!!Invalid Input!!!")
+          print()
       self.display()
       
     elif int(self.ask_again)==3:
-      self.year = self.ask_input("Enter year: ")
-      print()
+      while True:
+        try:
+          self.year = int(self.ask_input("Enter year: "))
+          if not dt.now().year>= self.year:
+            print(f"!!!Year must not exceed {dt.now().year}!!!")
+          break
+          
+        except:
+          print("!!!Invalid Input!!!")
+          print()
       self.display()
       
     elif int(self.ask_again)==4:
-      self.amount= self.ask_input("Enter amount(rupee): ")
-      print()
+      while True:
+        try:
+          self.amount= self.ask_input("Enter amount(rupee): ")
+          break
+        
+        except:
+          print("!!!Invalid input!!!")
+          print()
       self.display()
         
     elif int(self.ask_again)==5:
-      self.category= self.ask_input("Enter category: ")
       print()
+      self.category = self.ask_input("(leave blank if not remember)\nWhat did you spend your money on: ")
+      if self.category.strip() =="":
+        self.category =self.default_category
       self.display()
       
     elif int(self.ask_again)==6:
-      self.description =self.ask_input("Enter short description: ")
       print()
+      self.description = self.ask_input("(leave blank if don't want to)\nEnter short description: ")
+      if self.description.strip() =="":
+        self.description ="No description"
       self.display()
       
     elif int(self.ask_again)==7:
-      self.method= self.ask_input("Enter payment method: ")
+      print()
+      self.method = self.ask_input("[upi, cash, card]\n(leave blank if not sure)\nEnter payment method: ")
       print()
       self.display()
         
     else:
-      
       print("!!!Invalid Input!!!")
       print()
-      self.edit_input()
 
   def save_data(self):
     self.file = open("expense.csv",'a',newline="")
@@ -111,14 +194,31 @@ class Expense_tracker:
     self.file.close()
 
   def ask_salary(self):
-    salary = float(self.ask_input("Enter salary: "))
+    while True:
+      try:
+        salary = float(self.ask_input("Enter salary: "))
+        break
+      
+      except:
+        print("!!!Invalid input!!!")
+        print()
+      
     with open('salary_file.csv','w',newline="") as salary_file:
       asalary_file= csv.writer(salary_file)
       asalary_file.writerow([salary])
     return salary
 
   def add_amount(self):
-    self.add_amt = float(self.ask_input("Enter amount to add: "))
+    while True:
+      try:
+        self.add_amt = float(self.ask_input("Enter amount to add: "))
+        break
+      
+      except:
+        print("!!!Invalid input!!!")
+        print()
+        self.add_amount
+        
     with open('salary_file.csv','r') as abc:
       reader = csv.reader(abc)
       for row in reader:
@@ -162,7 +262,6 @@ def start_menu():
 
 def main():
   while True:
-      
     tracker =Expense_tracker()
     choice = start_menu()
     if choice =="1":
