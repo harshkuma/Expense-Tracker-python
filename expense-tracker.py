@@ -22,9 +22,10 @@ class Expense_tracker:
         self.day = int(self.ask_input("Enter day: "))
         if not 1<= self.day <=31:
           print("!!!Invalid date!!!")
+          continue
         break
         
-      except:
+      except ValueError:
         print("!!!Invalid Input!!!")
         print()
       
@@ -33,9 +34,10 @@ class Expense_tracker:
         self.month = int(self.ask_input("Enter month: "))
         if not 1<= self.month <=12:
           print("!!!Invalid Month!!!")
+          continue
         break
         
-      except:
+      except ValueError:
         print("!!!Invalid Input!!!")
         print()
             
@@ -44,18 +46,22 @@ class Expense_tracker:
         self.year = int(self.ask_input("Enter year: "))
         if not dt.now().year>= self.year:
           print(f"!!!Year must not exceed {dt.now().year}!!!")
+          continue
         break
         
-      except:
+      except ValueError:
         print("!!!Invalid Input!!!")
         print()   
             
     while True:
       try:
         self.amount = float(self.ask_input("Enter amount(rupee): "))
+        if self.amount<=0:
+          print("Amount must be greater than 0")
+          continue
         break
         
-      except:
+      except ValueError:
         print("!!!Invalid Input!!!")
         print()
     
@@ -70,7 +76,7 @@ class Expense_tracker:
       self.description ="No description"
     
     print()
-    self.method = self.ask_input("[upi, cash, card]\n(leave blank if not sure)\nEnter payment method: ")
+    self.method = self.ask_input("(leave blank if not sure)\n[upi, cash, card]\nEnter payment method: ")
     if self.method.strip() =="":
       self.method = "unknown"
     print('----------')
@@ -119,9 +125,10 @@ class Expense_tracker:
           self.day = int(self.ask_input("Enter day: "))
           if not 1>= self.day <=31:
             print("!!!Invalid date!!!")
+            continue
           break
           
-        except:
+        except ValueError:
           print("!!!Invalid Input!!!")
           print()
       self.display()
@@ -132,9 +139,10 @@ class Expense_tracker:
           self.month = int(self.ask_input("Enter month: "))
           if not 1>= self.day <=12:
             print("!!!Invalid Month!!!")
+            continue
           break
           
-        except:
+        except ValueError:
           print("!!!Invalid Input!!!")
           print()
       self.display()
@@ -145,9 +153,10 @@ class Expense_tracker:
           self.year = int(self.ask_input("Enter year: "))
           if not dt.now().year>= self.year:
             print(f"!!!Year must not exceed {dt.now().year}!!!")
+            continue
           break
           
-        except:
+        except ValueError:
           print("!!!Invalid Input!!!")
           print()
       self.display()
@@ -156,9 +165,13 @@ class Expense_tracker:
       while True:
         try:
           self.amount= self.ask_input("Enter amount(rupee): ")
+          if self.amount<=1:
+            print("Amount must be greater than 0")
+            continue
+
           break
         
-        except:
+        except ValueError:
           print("!!!Invalid input!!!")
           print()
       self.display()
@@ -199,7 +212,7 @@ class Expense_tracker:
         salary = float(self.ask_input("Enter salary: "))
         break
       
-      except:
+      except ValueError:
         print("!!!Invalid input!!!")
         print()
       
@@ -212,9 +225,12 @@ class Expense_tracker:
     while True:
       try:
         self.add_amt = float(self.ask_input("Enter amount to add: "))
+        if self.add_amount<=0:
+          print("Amount must be greater than 0")
+          continue
         break
       
-      except:
+      except ValueError:
         print("!!!Invalid input!!!")
         print()
         self.add_amount
@@ -232,18 +248,53 @@ class Expense_tracker:
     return actual_int
 
   def update_salary(self):
-    with open("salary_file.csv", 'r') as update_salary:
-      aupdate_salary = csv.reader(update_salary)
+    with open("salary_file.csv", 'r') as for_update_salaryr:
+      aupdate_salary = csv.reader(for_update_salaryr)
       for num in aupdate_salary:
         number1 =num[0]
         actual_num =float(number1)
         actual_num-=self.amount
 
-    with open("salary_file.csv",'w',newline="") as open_file:
-      new_salary = csv.writer(open_file)
+    with open("salary_file.csv",'w',newline="") as for_update_salaryw:
+      new_salary = csv.writer(for_update_salaryw)
       new_salary.writerow([actual_num])
     return actual_num
-      
+
+  def show_salary(self):
+    with open("salary_file.csv",'r') as for_show_salary:
+      reading = for_show_salary.read()
+      print(f"Your updated salary is ₹{reading}")
+
+
+  def category_spending(self):
+    category_dict ={}
+    with open("expense.csv",'r',newline="") as for_category_spending:
+      reading = csv.reader(for_category_spending)
+
+      next(reading)
+
+      for i in reading:
+        cat=i[2]
+        amount=i[1]
+
+        if cat in category_dict:
+          category_dict[cat]+=float(amount)
+
+        else:
+          category_dict[cat] = float(amount)
+
+    for category, amt in category_dict.items():
+      print(category,amt)
+
+  def summary_report(self):
+    print(f"========================\n")
+    self.show_salary()
+    print()
+    print(f"Here are your spendings category wise:")
+    self.category_spending()
+    print(f"========================\n")
+    print()
+   
   def add_expense(self):
     self.collect()
     self.display()
@@ -255,7 +306,8 @@ def start_menu():
   print("1. Update salary (it reset the previous salary amount)")
   print("2. Add amount to existing salary")
   print("3. Add expense")
-  print("4. Exit")
+  print("4. Show summary")
+  print("5. Exit")
   ask = input("Choose action: ")
   print()
   return ask
@@ -280,6 +332,10 @@ def main():
       print()
 
     elif choice=='4':
+      tracker.summary_report()
+    
+
+    elif choice=='5':
       print("!!!Program ended!!!")
       break
 
