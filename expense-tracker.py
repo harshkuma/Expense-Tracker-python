@@ -289,7 +289,6 @@ class Expense_tracker:
   def summary_report(self):
     print(f"========================\n")
     self.show_salary()
-    print()
     print(f"Here are your spendings category wise:")
     self.category_spending()
     print(f"========================\n")
@@ -302,12 +301,47 @@ class Expense_tracker:
     self.update_salary()
     print("Details Saved")
 
+  def clear_expense(self):
+    clear_data = self.ask_input("Are you sure you want to remove all data [yes/no]: ")
+
+    if clear_data.lower().strip() =="yes":
+      print("⚠️  WARNING: This will permanently delete all your tracking data.")
+      clear_data_again = self.ask_input("Are you sure you want to proceed? (yes/no): ")
+
+      if clear_data_again.lower().strip() =="yes":
+        with open('sample.csv',"w",newline="") as  for_clear_expense:
+          write = csv.writer(for_clear_expense)
+          write.writerow(['date','amount','category','description','payment_method'])
+        print("Data deleted successfully.")
+        print()
+
+      elif clear_data.lower().strip()=='no':
+        print("Data not deleted.")
+        print()
+        return
+
+      else:
+        print("!!!ENTER 'yes'/'no' only!!!")
+        print()
+        self.clear_expense()
+
+    elif clear_data.lower().strip()=='no':
+      print("Data not deleted.")
+      print()
+      return
+
+    else:
+      print("!!!ENTER 'yes'/'no' only!!!")
+      print()
+      self.clear_expense()
+
 def start_menu():
   print("1. Update salary (it reset the previous salary amount)")
   print("2. Add amount to existing salary")
   print("3. Add expense")
   print("4. Show summary")
-  print("5. Exit")
+  print("5. Clear expense data")
+  print("6. Exit")
   ask = input("Choose action: ")
   print()
   return ask
@@ -333,9 +367,11 @@ def main():
 
     elif choice=='4':
       tracker.summary_report()
-    
 
     elif choice=='5':
+      tracker.clear_expense()
+    
+    elif choice=='6':
       print("!!!Program ended!!!")
       break
 
