@@ -337,6 +337,7 @@ class Expense_tracker:
       self.clear_expense()
 
 def start_menu():
+  print()
   print("1. Update salary (it reset the previous salary amount)")
   print("2. Add amount to existing salary")
   print("3. Add expense")
