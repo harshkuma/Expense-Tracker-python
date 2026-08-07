@@ -309,7 +309,7 @@ class Expense_tracker:
       clear_data_again = self.ask_input("Are you sure you want to proceed? (yes/no): ")
 
       if clear_data_again.lower().strip() =="yes":
-        with open('sample.csv',"w",newline="") as  for_clear_expense:
+        with open('expense.csv',"w",newline="") as  for_clear_expense:
           write = csv.writer(for_clear_expense)
           write.writerow(['date','amount','category','description','payment_method'])
         print("Data deleted successfully.")
