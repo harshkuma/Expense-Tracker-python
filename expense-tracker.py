@@ -210,22 +210,26 @@ class Expense_tracker:
     while True:
       try:
         salary = float(self.ask_input("Enter salary: "))
+        if salary<=0:
+          print("!!!Salary cannot be 0 or below 0!!!")
+          continue
         break
       
       except ValueError:
         print("!!!Invalid input!!!")
         print()
-      
+        
+    
     with open('salary_file.csv','w',newline="") as salary_file:
       asalary_file= csv.writer(salary_file)
       asalary_file.writerow([salary])
-    return salary
+    
 
   def add_amount(self):
     while True:
       try:
         self.add_amt = float(self.ask_input("Enter amount to add: "))
-        if self.add_amount<=0:
+        if self.add_amt<=0:
           print("Amount must be greater than 0")
           continue
         break
@@ -233,7 +237,7 @@ class Expense_tracker:
       except ValueError:
         print("!!!Invalid input!!!")
         print()
-        self.add_amount
+        
         
     with open('salary_file.csv','r') as abc:
       reader = csv.reader(abc)
@@ -245,7 +249,6 @@ class Expense_tracker:
     with open("salary_file.csv",'w',newline="") as open_again:
       write_again = csv.writer(open_again)
       write_again.writerow([actual_int])
-    return actual_int
 
   def update_salary(self):
     with open("salary_file.csv", 'r') as for_update_salaryr:
@@ -258,13 +261,11 @@ class Expense_tracker:
     with open("salary_file.csv",'w',newline="") as for_update_salaryw:
       new_salary = csv.writer(for_update_salaryw)
       new_salary.writerow([actual_num])
-    return actual_num
 
   def show_salary(self):
     with open("salary_file.csv",'r') as for_show_salary:
       reading = for_show_salary.read()
       print(f"Your updated salary is ₹{reading}")
-
 
   def category_spending(self):
     category_dict ={}
@@ -381,5 +382,5 @@ def main():
       print()
       main()
 
-
+#fftgtggg
 main()
