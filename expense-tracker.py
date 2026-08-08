@@ -288,6 +288,7 @@ class Expense_tracker:
       print(category,amt)
 
   def summary_report(self):
+    print()
     print(f"========================\n")
     self.show_salary()
     print(f"Here are your spendings category wise:")
@@ -300,12 +301,12 @@ class Expense_tracker:
     self.display()
     self.save_data()
     self.update_salary()
-    print("Details Saved")
 
   def clear_expense(self):
     clear_data = self.ask_input("Are you sure you want to remove all data [yes/no]: ")
 
     if clear_data.lower().strip() =="yes":
+      print()
       print("⚠️  WARNING: This will permanently delete all your tracking data.")
       clear_data_again = self.ask_input("Are you sure you want to proceed? (yes/no): ")
 
@@ -322,6 +323,7 @@ class Expense_tracker:
         return
 
       else:
+        print()
         print("!!!ENTER 'yes'/'no' only!!!")
         print()
         self.clear_expense()
@@ -332,6 +334,7 @@ class Expense_tracker:
       return
 
     else:
+      print()
       print("!!!ENTER 'yes'/'no' only!!!")
       print()
       self.clear_expense()
