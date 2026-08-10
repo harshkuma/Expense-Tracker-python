@@ -38,7 +38,7 @@ class Expense_tracker:
       
     while True:
       try:
-        month = self.ask_input("Enter month : ")
+        month = self.ask_input("Enter month (press enter for today): ")
 
         if month.strip() == "":
           self.month = dt.now().month
@@ -145,10 +145,17 @@ class Expense_tracker:
     if int(self.ask_again)==1:
       while True:
         try:
-          self.day = int(self.ask_input("Enter day: "))
-          if not 1>= self.day <=31:
+          day = self.ask_input("Enter day (press enter for today): ")
+          if day.strip()=="":
+            self.day=dt.now().day
+            break
+
+          self.day = int(day)
+
+          if not 1<= self.day <=31:
             print("!!!Invalid date!!!")
             continue
+          
           break
           
         except ValueError:
@@ -159,16 +166,23 @@ class Expense_tracker:
     elif int(self.ask_again)==2:
       while True:
         try:
-          self.month = int(self.ask_input("Enter month: "))
-          if not 1>= self.day <=12:
+          month = self.ask_input("Enter month (press enter for today): ")
+  
+          if month.strip() == "":
+            self.month = dt.now().month
+            break
+  
+          self.month =int(month)
+  
+          if not 1<= self.month <=12:
             print("!!!Invalid Month!!!")
             continue
+  
           break
           
         except ValueError:
           print("!!!Invalid Input!!!")
           print()
-      self.display()
       
     elif int(self.ask_again)==3:
       while True:
@@ -187,16 +201,22 @@ class Expense_tracker:
     elif int(self.ask_again)==4:
       while True:
         try:
-          self.amount= self.ask_input("Enter amount(rupee): ")
-          if self.amount<0:
-            print("Amount must be greater than 0")
+          year = self.ask_input("Enter year (press enter for today): ")
+  
+          if year.strip() =="":
+            self.year = dt.now().year
+            break
+  
+          self.year = int(year)
+  
+          if not dt.now().year>= self.year:
+            print(f"!!!Year must not exceed {dt.now().year}!!!")
             continue
-
           break
-        
+          
         except ValueError:
-          print("!!!Invalid input!!!")
-          print()
+          print("!!!Invalid Input!!!")
+          print()   
       self.display()
         
     elif int(self.ask_again)==5:
