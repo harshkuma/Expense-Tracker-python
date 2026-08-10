@@ -19,10 +19,17 @@ class Expense_tracker:
   def collect(self):
     while True:
       try:
-        self.day = int(self.ask_input("Enter day: "))
+        day = self.ask_input("Enter day (press enter for today): ")
+        if day.strip()=="":
+          day=dt.now().day
+          break
+
+        self.day = int(day)
+
         if not 1<= self.day <=31:
           print("!!!Invalid date!!!")
           continue
+        
         break
         
       except ValueError:
@@ -31,10 +38,18 @@ class Expense_tracker:
       
     while True:
       try:
-        self.month = int(self.ask_input("Enter month: "))
+        month = self.ask_input("Enter month : ")
+
+        if month.strip() == "":
+          month = dt.now().month
+          break
+
+        self.month =int(month)
+
         if not 1<= self.month <=12:
           print("!!!Invalid Month!!!")
           continue
+
         break
         
       except ValueError:
@@ -43,7 +58,14 @@ class Expense_tracker:
             
     while True:
       try:
-        self.year = int(self.ask_input("Enter year: "))
+        year = self.ask_input("Enter year (press enter for today): ")
+
+        if year.strip() =="":
+          year = dt.now().year
+          break
+
+        self.year = int(year)
+
         if not dt.now().year>= self.year:
           print(f"!!!Year must not exceed {dt.now().year}!!!")
           continue
