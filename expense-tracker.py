@@ -246,7 +246,7 @@ class Expense_tracker:
   def save_data(self):
     self.file = open("expense.csv",'a',newline="")
     self.afile = csv.writer(self.file)
-    self.afile.writerow([f'{self.year}/{(self.month):02}/{(self.day):02}',self.amount,self.category,self.description,self.method])
+    self.afile.writerow([f'{self.year}/{(self.month):02}/{(self.day):02}',self.amount,self.category.lower(),self.description.lower(),self.method.lower()])
     self.file.close()
 
   def ask_salary(self):
