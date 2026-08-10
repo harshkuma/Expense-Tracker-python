@@ -21,7 +21,7 @@ class Expense_tracker:
       try:
         day = self.ask_input("Enter day (press enter for today): ")
         if day.strip()=="":
-          day=dt.now().day
+          self.day=dt.now().day
           break
 
         self.day = int(day)
@@ -41,7 +41,7 @@ class Expense_tracker:
         month = self.ask_input("Enter month : ")
 
         if month.strip() == "":
-          month = dt.now().month
+          self.month = dt.now().month
           break
 
         self.month =int(month)
@@ -61,7 +61,7 @@ class Expense_tracker:
         year = self.ask_input("Enter year (press enter for today): ")
 
         if year.strip() =="":
-          year = dt.now().year
+          self.year = dt.now().year
           break
 
         self.year = int(year)
