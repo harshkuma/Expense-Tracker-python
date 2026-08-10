@@ -78,7 +78,7 @@ class Expense_tracker:
     while True:
       try:
         self.amount = float(self.ask_input("Enter amount(rupee): "))
-        if self.amount<=0:
+        if self.amount<0:
           print("Amount must be greater than 0")
           continue
         break
@@ -188,7 +188,7 @@ class Expense_tracker:
       while True:
         try:
           self.amount= self.ask_input("Enter amount(rupee): ")
-          if self.amount<=1:
+          if self.amount<0:
             print("Amount must be greater than 0")
             continue
 
