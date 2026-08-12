@@ -119,10 +119,9 @@ class Expense_tracker:
     
   
   def edit_opiton(self):
-    time.sleep(5)
-    self.choice= self.ask_input("Would you like to edit any field (yes/no): ")
+    self.choice= self.ask_input("Would you like to edit any field (y/n): ")
       
-    if self.choice.strip().lower() =='yes':
+    if self.choice.lower() =='y':
       print("1. day")
       print("2. month")
       print("3. year")
@@ -133,7 +132,7 @@ class Expense_tracker:
       print('----------')
       self.edit_input()
     
-    elif self.choice.strip().lower()=='no':
+    elif self.choice.lower()=='n':
       return
       
     else:
@@ -414,8 +413,8 @@ class Expense_tracker:
 
 def start_menu():
   print()
-  print("1. Update balance (it reset the previous balance amount)")
-  print("2. Add amount to existing balance")
+  print("1. Update salary (it reset the previous salary amount)")
+  print("2. Add amount to existing salary")
   print("3. Add expense")
   print("4. Show summary")
   print("5. Clear expense data")
