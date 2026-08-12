@@ -260,7 +260,7 @@ class Expense_tracker:
         print("Balance updated")
 
         if salary<=0:
-          print("!!!Salary cannot be 0 or below 0!!!")
+          print("!!!Salary cannot be 0 or below!!!")
           continue
         break
       
@@ -413,8 +413,8 @@ class Expense_tracker:
 
 def start_menu():
   print()
-  print("1. Update salary (it reset the previous salary amount)")
-  print("2. Add amount to existing salary")
+  print("1. Update balance (it reset the previous balance amount)")
+  print("2. Add amount to existing balance")
   print("3. Add expense")
   print("4. Show summary")
   print("5. Clear expense data")
