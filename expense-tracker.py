@@ -361,6 +361,7 @@ class Expense_tracker:
     self.show_salary()
     print(f"Here are your spendings category wise:")
     self.category_spending()
+    print()
     print(f"========================\n")
     print()
     time.sleep(10)
