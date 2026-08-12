@@ -122,7 +122,7 @@ class Expense_tracker:
     time.sleep(5)
     self.choice= self.ask_input("Would you like to edit any field (yes/no): ")
       
-    if self.choice.strip().lower() =='y':
+    if self.choice.strip().lower() =='yes':
       print("1. day")
       print("2. month")
       print("3. year")
