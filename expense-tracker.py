@@ -1,5 +1,7 @@
 import csv
 from datetime import datetime as dt
+import time
+
 class Expense_tracker:
     
   def __init__(self):
@@ -252,7 +254,11 @@ class Expense_tracker:
   def ask_salary(self):
     while True:
       try:
-        salary = float(self.ask_input("Enter salary: "))
+        print(f"⚠️  WARNING: This will delete old balance.")
+        time.sleep(5)
+        salary = float(self.ask_input("Enter amount: "))
+        print("Balance updated")
+
         if salary<=0:
           print("!!!Salary cannot be 0 or below 0!!!")
           continue
@@ -275,11 +281,30 @@ class Expense_tracker:
         if self.add_amt<=0:
           print("Amount must be greater than 0")
           continue
+
+        print()
+        print(f"⚠️  WARNING: This will add ₹{self.add_amt} to your money.")
+
+        time.sleep(4)
+        while True:
+          confirm = input("Would you like to continue [yes/no]: ")
+          if confirm.strip() =='yes':
+            break
+
+          elif confirm.strip()=='no':
+            print("Amount not added.")
+            return
+
+          else:
+            print()
+            print("Enter [yes/no]")
+            continue
         break
       
       except ValueError:
         print("!!!Invalid input!!!")
         print()
+
         
         
     with open('salary_file.csv','r') as abc:
@@ -308,7 +333,7 @@ class Expense_tracker:
   def show_salary(self):
     with open("salary_file.csv",'r') as for_show_salary:
       reading = for_show_salary.read()
-      print(f"Your updated salary is ₹{reading}")
+      print(f"Your updated balance is ₹{reading}")
 
   def category_spending(self):
     category_dict ={}
@@ -338,12 +363,14 @@ class Expense_tracker:
     self.category_spending()
     print(f"========================\n")
     print()
+    time.sleep(10)
    
   def add_expense(self):
     self.collect()
     self.display()
     self.save_data()
     self.update_salary()
+    print("Details saved.")
 
   def clear_expense(self):
     clear_data = self.ask_input("Are you sure you want to remove all data [yes/no]: ")
@@ -351,6 +378,7 @@ class Expense_tracker:
     if clear_data.lower().strip() =="yes":
       print()
       print("⚠️  WARNING: This will permanently delete all your tracking data.")
+      time.sleep(5)
       clear_data_again = self.ask_input("Are you sure you want to proceed? (yes/no): ")
 
       if clear_data_again.lower().strip() =="yes":
@@ -400,17 +428,14 @@ def main():
     choice = start_menu()
     if choice =="1":
       tracker.ask_salary()
-      print("Detail saved")
       print()
 
     elif choice=='2':
       tracker.add_amount()
-      print("Detail saved")
       print()
 
     elif choice=='3':
       tracker.add_expense()
-      print("Detail saved")
       print()
 
     elif choice=='4':
@@ -429,5 +454,5 @@ def main():
       print()
       main()
 
-#fftgtggg
+
 main()
