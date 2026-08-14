@@ -59,7 +59,7 @@ class Expense_tracker:
         
       except ValueError:
         print("!!!Invalid Input!!!")
-        time.sleep()
+        time.sleep(2)
         print()
             
     while True:
@@ -436,7 +436,7 @@ class Expense_tracker:
           write = csv.writer(for_clear_expense)
           write.writerow(['date','amount','category','description','payment_method'])
         print("Data deleted successfully.")
-        time.sleep()
+        time.sleep(2)
         print()
 
       elif clear_data.lower().strip()=='no':
