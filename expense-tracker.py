@@ -507,7 +507,6 @@ def main():
       print("Enter value between [1-6]")
       time.sleep(2)
       print()
-      main()
 
 
 main()
