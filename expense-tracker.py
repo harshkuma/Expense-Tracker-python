@@ -139,7 +139,7 @@ class Expense_tracker:
   def edit_opiton(self):
     self.choice= self.ask_input("Would you like to edit any field (yes/no): ")
       
-    if self.choice.lower() =='yes':
+    if self.choice.lower().strip() =='yes':
       print("1. day")
       print("2. month")
       print("3. year")
@@ -150,7 +150,7 @@ class Expense_tracker:
       print('----------')
       self.edit_input()
     
-    elif self.choice.lower()=='no':
+    elif self.choice.lower().strip()=='no':
       return
       
     else:
@@ -357,11 +357,10 @@ class Expense_tracker:
 
         while True:
           confirm = input("Would you like to continue [yes/no]: ")
-
-          if confirm.strip() =='yes':
+          if confirm.strip().lower() =='yes':
             break
 
-          elif confirm.strip()=='no':
+          elif confirm.strip().lower()=='no':
             print("Amount not added.")
 
             time.sleep(2)
@@ -482,7 +481,7 @@ class Expense_tracker:
     print(f"========================\n")
     print()
 
-    time.sleep(10)
+    time.sleep(15)
    
   def add_expense(self):
     self.collect()
