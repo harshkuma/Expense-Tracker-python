@@ -30,6 +30,7 @@ class Expense_tracker:
 
         if not 1<= self.day <=31:
           print("!!!Invalid date!!!")
+
           time.sleep(2)
           continue
         
@@ -37,6 +38,7 @@ class Expense_tracker:
         
       except ValueError:
         print("!!!Invalid Input!!!")
+
         time.sleep(2)
         print()
       
@@ -52,6 +54,7 @@ class Expense_tracker:
 
         if not 1<= self.month <=12:
           print("!!!Invalid Month!!!")
+
           time.sleep(2)
           continue
 
@@ -59,6 +62,7 @@ class Expense_tracker:
         
       except ValueError:
         print("!!!Invalid Input!!!")
+
         time.sleep(2)
         print()
             
@@ -74,12 +78,14 @@ class Expense_tracker:
 
         if not dt.now().year>= self.year:
           print(f"!!!Year must not exceed {dt.now().year}!!!")
+
           time.sleep(2)
           continue
         break
         
       except ValueError:
         print("!!!Invalid Input!!!")
+
         time.sleep(2)
         print()   
             
@@ -88,12 +94,14 @@ class Expense_tracker:
         self.amount = float(self.ask_input("Enter amount(rupee): "))
         if self.amount<0:
           print("Amount must be greater than 0")
+
           time.sleep(2)
           continue
         break
         
       except ValueError:
         print("!!!Invalid Input!!!")
+        
         time.sleep(2)
         print()
     
@@ -123,6 +131,7 @@ class Expense_tracker:
     print(f"descripiton: {self.description}")
     print(f"payment method: {self.method}")
     print('----------')
+
     time.sleep(6)
     self.edit_opiton()
     
@@ -130,7 +139,7 @@ class Expense_tracker:
   def edit_opiton(self):
     self.choice= self.ask_input("Would you like to edit any field (yes/no): ")
       
-    if self.choice.lower() =='yes':
+    if self.choice.lower().strip() =='yes':
       print("1. day")
       print("2. month")
       print("3. year")
@@ -141,13 +150,14 @@ class Expense_tracker:
       print('----------')
       self.edit_input()
     
-    elif self.choice.lower()=='no':
+    elif self.choice.lower().strip()=='no':
       return
       
     else:
       print()
       print("!!!Invalid Input!!!")
       print("Enter (yes/no)")
+
       time.sleep(2)
       self.edit_opiton()
 
@@ -162,6 +172,7 @@ class Expense_tracker:
 
         print("!!!INVALID INPUT!!!")
         print("Enter a value between [1-7]")
+
         time.sleep(2)
         print()
         continue
@@ -178,6 +189,7 @@ class Expense_tracker:
 
           if not 1<= self.day <=31:
             print("!!!Invalid date!!!")
+
             time.sleep(2)
             continue
           
@@ -185,6 +197,7 @@ class Expense_tracker:
           
         except ValueError:
           print("!!!Invalid Input!!!")
+
           time.sleep(2)
           print()
       self.display()
@@ -203,6 +216,7 @@ class Expense_tracker:
   
           if not 1<= self.month <=12:
             print("!!!Invalid Month!!!")
+
             time.sleep(2)
             continue
   
@@ -210,6 +224,7 @@ class Expense_tracker:
           
         except ValueError:
           print("!!!Invalid Input!!!")
+
           time.sleep(2)
           print()
       
@@ -217,14 +232,17 @@ class Expense_tracker:
       while True:
         try:
           self.year = int(self.ask_input("Enter year: "))
+
           if not dt.now().year>= self.year:
             print(f"!!!Year must not exceed {dt.now().year}!!!")
+
             time.sleep(2)
             continue
           break
           
         except ValueError:
           print("!!!Invalid Input!!!")
+
           time.sleep(2)
           print()
       self.display()
@@ -242,12 +260,14 @@ class Expense_tracker:
   
           if not dt.now().year>= self.year:
             print(f"!!!Year must not exceed {dt.now().year}!!!")
+
             time.sleep(2)
             continue
           break
           
         except ValueError:
           print("!!!Invalid Input!!!")
+
           time.sleep(2)
           print()   
       self.display()
@@ -274,6 +294,7 @@ class Expense_tracker:
         
     else:
       print("!!!Invalid Input!!!")
+
       time.sleep(2)
       print()
 
@@ -287,8 +308,10 @@ class Expense_tracker:
     while True:
       try:
         print(f"⚠️  WARNING: This will delete old balance.")
+
         time.sleep(5)
         salary = self.ask_input("Enter amount (press enter for cancel): ")
+
         if salary.strip() =="":
           return
         else:
@@ -297,6 +320,7 @@ class Expense_tracker:
 
         if salary<=0:
           print("!!!Salary cannot be below 0!!!")
+
           time.sleep(2)
           print()
           continue
@@ -304,6 +328,7 @@ class Expense_tracker:
       
       except ValueError:
         print("!!!Invalid input!!!")
+
         time.sleep(2)
         print()
         
@@ -319,6 +344,7 @@ class Expense_tracker:
     while True:
       try:
         self.add_amt = float(self.ask_input("Enter amount to add: "))
+
         if self.add_amt<=0:
           print("Amount must be greater than 0")
           time.sleep(2)
@@ -326,15 +352,17 @@ class Expense_tracker:
 
         print()
         print(f"⚠️  WARNING: This will add ₹{self.add_amt} to existing balance.")
+
         time.sleep(4)
 
         while True:
           confirm = input("Would you like to continue [yes/no]: ")
-          if confirm.strip() =='yes':
+          if confirm.strip().lower() =='yes':
             break
 
-          elif confirm.strip()=='no':
+          elif confirm.strip().lower()=='no':
             print("Amount not added.")
+
             time.sleep(2)
             return
 
@@ -342,11 +370,13 @@ class Expense_tracker:
             print()
             print("Enter [yes/no]")
             time.sleep(2)
+
             continue
         break
       
       except ValueError:
         print("!!!Invalid input!!!")
+
         time.sleep(2)
         print()
 
@@ -363,11 +393,13 @@ class Expense_tracker:
       write_again = csv.writer(open_again)
       write_again.writerow([actual_int])
       print("Amount added successfully")
+
       time.sleep(2)
 
   def update_salary(self):
     with open("salary_file.csv", 'r') as for_update_salaryr:
       aupdate_salary = csv.reader(for_update_salaryr)
+
       for num in aupdate_salary:
         number1 =num[0]
         actual_num =float(number1)
@@ -387,9 +419,12 @@ class Expense_tracker:
     with open("expense.csv",'r',newline="") as for_category_spending:
       reading = csv.reader(for_category_spending)
 
-      next(reading)
+      next(reading, None)
 
       for i in reading:
+        if not i:
+          continue
+
         cat=i[2]
         amount=i[1]
 
@@ -399,20 +434,54 @@ class Expense_tracker:
         else:
           self.category_dict[cat] = float(amount)
 
-    for category, amt in self.category_dict.items():
-      print(category,amt)
+    if self.category_dict:
+      for category, amt in self.category_dict.items():
+        print(category,amt)
+
+    else:
+      print("No expense entered yet")
+
+  def date_range(self):
+    dates = []
+
+    with open("expense.csv","r", newline="") as for_date_range:
+      reading = csv.reader(for_date_range)
+
+      next(reading)
+
+      for date in reading:
+        if not date:
+          continue
+
+        dates.append(dt.strptime(date[0], "%Y/%m/%d"))
+
+      if dates:
+        self.first_dt = min(dates)
+        self.first_dt = dt.strftime(self.first_dt, "%d %B %Y")
+
+        self.last_dt = max(dates)
+        self.last_dt = dt.strftime(self.last_dt, "%d %B %Y")
+
+
+      else:
+        self.first_dt = dt.now().date().strftime("%d %B %Y")
+        self.last_dt = dt.now().date().strftime("%d %B %Y")
+
 
   def summary_report(self):
     print()
     print(f"========================\n")
     self.show_salary()
-    print(f"Here are your spendings category wise:")
+    self.date_range()
+    print(f"Summary from '{self.first_dt}' to '{self.last_dt}'")
+    print(f"Here are your category wise spendings:")
     self.category_spending()
     print()
     print(f"Total money you've spent: {sum(self.category_dict.values())}")
     print(f"========================\n")
     print()
-    time.sleep(10)
+
+    time.sleep(15)
    
   def add_expense(self):
     self.collect()
@@ -420,6 +489,7 @@ class Expense_tracker:
     self.save_data()
     self.update_salary()
     print("Details saved.")
+
     time.sleep(2)
 
   def clear_expense(self):
@@ -428,6 +498,7 @@ class Expense_tracker:
     if clear_data.lower().strip() =="yes":
       print()
       print("⚠️  WARNING: This will permanently delete all your tracking data.")
+
       time.sleep(5)
       clear_data_again = self.ask_input("Are you sure you want to proceed? (yes/no): ")
 
@@ -436,11 +507,13 @@ class Expense_tracker:
           write = csv.writer(for_clear_expense)
           write.writerow(['date','amount','category','description','payment_method'])
         print("Data deleted successfully.")
+
         time.sleep(2)
         print()
 
       elif clear_data.lower().strip()=='no':
         print("Data not deleted.")
+
         time.sleep(2)
         print()
         return
@@ -448,12 +521,14 @@ class Expense_tracker:
       else:
         print()
         print("!!!ENTER 'yes'/'no' only!!!")
+
         time.sleep(2)
         print()
         self.clear_expense()
 
     elif clear_data.lower().strip()=='no':
       print("Data not deleted.")
+
       time.sleep(2)
       print()
       return
@@ -461,6 +536,7 @@ class Expense_tracker:
     else:
       print()
       print("!!!ENTER 'yes'/'no' only!!!")
+
       time.sleep(2)
       print()
       self.clear_expense()
